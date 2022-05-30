@@ -1,22 +1,22 @@
-.search {
+.Search {
   display: flex;
   gap: 0.75rem;
 }
 
-.searchInput {
+.SearchInput {
   display: flex;
   background-color: var(--inputColor);
   border-radius: 10px;
   padding: 5px;
 }
 
-.searchInput > input {
+.SearchInput > input {
   background-color: transparent;
   border: none;
   outline: none;
 }
 
-.searchIcon {
+.SearchIcon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,6 +26,6 @@
   color: white;
 }
 
-.searchIcon:hover {
+.SearchIcon:hover {
   cursor: pointer;
 }

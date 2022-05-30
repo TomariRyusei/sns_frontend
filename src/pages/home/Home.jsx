@@ -5,10 +5,10 @@ import ProfileSide from "../../components/profileSide/ProfileSide";
 
 const Home = () => {
   return (
-    <div className="home">
+    <div className="Home">
       <ProfileSide />
-      <div className="postSide">Posts</div>
-      <div className="rightSide">RightSide</div>
+      <div className="PostSide">Posts</div>
+      <div className="RightSide">RightSide</div>
     </div>
   );
 };

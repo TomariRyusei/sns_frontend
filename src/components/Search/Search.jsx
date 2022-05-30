@@ -5,11 +5,11 @@ import "./Search.css";
 
 const Search = () => {
   return (
-    <div className="search">
+    <div className="Search">
       <img src={Logo} alt="" />
-      <div className="searchInput">
+      <div className="SearchInput">
         <input type="text" placeholder="#キーワード検索" />
-        <div className="searchIcon">
+        <div className="SearchIcon">
           <UilSearch />
         </div>
       </div>
