@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./Home.css";
-import ProfileSide from "../../components/profileSide/ProfileSide";
+import ProfileSide from "../../components/ProfileSide/ProfileSide";
 
 const Home = () => {
   return (
