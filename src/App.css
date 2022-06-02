@@ -38,7 +38,7 @@
   color: white;
   border: none;
   border-radius: 0.5rem;
-  background: var(--buttonBg);
+  background: var(--navy);
   transition: all 100ms ease-out;
 }
 
@@ -47,4 +47,8 @@
   color: var(--navy);
   background: transparent;
   border: 2px solid var(--navy);
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
