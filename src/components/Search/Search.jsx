@@ -5,7 +5,7 @@ import "./Search.css";
 const Search = () => {
   return (
     <div className="Search">
-      {/* <img src={Logo} alt="" /> */}
+      <img src="" alt="" />
       <div className="SearchInput">
         <input type="text" placeholder="#キーワード検索" />
         <div className="SearchIcon">
