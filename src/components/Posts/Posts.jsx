@@ -2,7 +2,7 @@ import React from "react";
 
 import Post from "../Post/Post";
 import "./Posts.css";
-import { PostsData } from "../../Data/PostsData";
+import { PostsData } from "../../data/PostsData";
 
 const Posts = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./Followers.css";
-import { Followers } from "../../Data/FollowersData";
+import { Followers } from "../../data/FollowersData";
 
 const FollowersCard = () => {
   return (

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./Auth.css";
+import { useDispatch, useSelector } from "react-redux";
+import { login, signUp } from "../../actions/AuthAction";
+
 const Auth = () => {
   // フォームデータの初期値
   const initialState = {
@@ -19,6 +22,8 @@ const Auth = () => {
   // 登録時パスワード一致確認
   const [confirmPass, setConfirmPass] = useState(true);
 
+  const dispatch = useDispatch();
+
   const handleFormDataChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -27,12 +32,11 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignUp) {
-      if (data.password !== data.confirmpass) {
-        setConfirmPass(false);
-      } else {
-        setConfirmPass(true);
-      }
+      data.password === data.confirmpass
+        ? dispatch(signUp(data))
+        : setConfirmPass(false);
     } else {
+      dispatch(login(data));
     }
   };
 
