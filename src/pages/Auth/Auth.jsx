@@ -23,7 +23,7 @@ const Auth = () => {
   const [confirmPass, setConfirmPass] = useState(true);
 
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.authReducer.loading);
+  const loading = useSelector((state) => state.AuthReducer.loading);
 
   const handleFormDataChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -135,8 +135,8 @@ const Auth = () => {
               }}
             >
               {isSignUp
-                ? "すでにアカウントをお持ちのようです。 ログインしてください。"
-                : "アカウントをお持ちでないようです。登録をお願いします。"}
+                ? "すでにアカウントをお持ちの方はこちらから"
+                : "アカウントをお持ちでない方はこちらから"}
             </span>
           </div>
           <button
