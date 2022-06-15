@@ -23,6 +23,7 @@ const Auth = () => {
   const [confirmPass, setConfirmPass] = useState(true);
 
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.authReducer.loading);
 
   const handleFormDataChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -138,8 +139,12 @@ const Auth = () => {
                 : "アカウントをお持ちでないようです。登録をお願いします。"}
             </span>
           </div>
-          <button className="button InfoButton" type="submit">
-            {isSignUp ? "登録" : "ログイン"}
+          <button
+            className="button InfoButton"
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "loading..." : isSignUp ? "登録" : "ログイン"}
           </button>
         </form>
       </div>
