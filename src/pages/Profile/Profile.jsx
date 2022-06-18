@@ -11,7 +11,7 @@ const Profile = () => {
       <ProfileLeft />
 
       <div className="ProfileCenter">
-        <ProfileCard />
+        <ProfileCard location={"profilePage"} />
         <PostSide />
       </div>
 
