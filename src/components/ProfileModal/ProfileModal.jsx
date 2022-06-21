@@ -1,8 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, useMantineTheme } from "@mantine/core";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-const ProfileModal = ({ modalOpened, setModalOpened }) => {
+import { uploadImage } from "../../actions/uploadAction";
+import { updateUser } from "../../actions/UserAction";
+
+const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const theme = useMantineTheme();
+  // パスワードは除外
+  const { password, ...other } = data;
+  const [formData, setFormData] = useState(other);
+  const [profileImage, setProfileImage] = useState(null);
+  const [coverImage, setCoverImage] = useState(null);
+  const dispatch = useDispatch();
+  const param = useParams();
+  const { user } = useSelector((state) => state.AuthReducer.authData);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let img = e.target.files[0];
+      e.target.name === "profileImage"
+        ? setProfileImage(img)
+        : setCoverImage(img);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let UserData = formData;
+    if (profileImage) {
+      const data = new FormData();
+      const fileName = Date.now() + profileImage.name;
+      data.append("name", fileName);
+      data.append("file", profileImage);
+      UserData.profilePicture = fileName;
+      try {
+        dispatch(uploadImage(data));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    if (coverImage) {
+      const data = new FormData();
+      const fileName = Date.now() + coverImage.name;
+      data.append("name", fileName);
+      data.append("file", coverImage);
+      UserData.coverPicture = fileName;
+      try {
+        dispatch(uploadImage(data));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    dispatch(updateUser(param.id, UserData));
+    setModalOpened(false);
+  };
+
   return (
     <Modal
       overlayColor={
@@ -16,58 +74,70 @@ const ProfileModal = ({ modalOpened, setModalOpened }) => {
       opened={modalOpened}
       onClose={() => setModalOpened(false)}
     >
-      <form className="InfoForm">
+      <form className="InfoForm" onSubmit={handleSubmit}>
         <h3>あなたのプロフィール</h3>
 
         <div>
           <input
+            value={formData.firstname}
             type="text"
             className="InfoInput"
-            name="FirstName"
+            name="firstname"
             placeholder="名"
+            onChange={handleChange}
           />
 
           <input
+            value={formData.lastname}
             type="text"
             className="InfoInput"
-            name="LastName"
+            name="lastname"
             placeholder="姓"
+            onChange={handleChange}
           />
         </div>
 
         <div>
           <input
+            value={formData.work}
             type="text"
             className="InfoInput"
-            name="worksAT"
+            name="work"
             placeholder="お仕事"
+            onChange={handleChange}
           />
         </div>
 
         <div>
           <input
+            value={formData.livesIn}
             type="text"
             className="InfoInput"
-            name="livesIN"
+            name="livesIn"
             placeholder="お住まいの地域"
+            onChange={handleChange}
           />
 
           <input
+            value={formData.country}
             type="text"
             className="InfoInput"
-            name="Country"
+            name="country"
             placeholder="お住まいの国"
+            onChange={handleChange}
           />
         </div>
 
         <div>
           Profile Image
-          <input type="file" name="profileImg" />
+          <input type="file" name="profileImage" onChange={onImageChange} />
           Cover Image
-          <input type="file" name="coverImg" />
+          <input type="file" name="coverImage" onChange={onImageChange} />
         </div>
 
-        <button className="button InfoButton">更新する</button>
+        <button className="button InfoButton" type="submit">
+          更新する
+        </button>
       </form>
     </Modal>
   );
