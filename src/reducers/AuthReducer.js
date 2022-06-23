@@ -30,6 +30,36 @@ const AuthReducer = (
     case "UPDATING_FAIL":
       return { ...state, updateLoading: false, error: true };
 
+    case "FOLLOW_USER":
+      // 新たにフォローするユーザーのIDを追加
+      return {
+        ...state,
+        authData: {
+          ...state.authData,
+          user: {
+            ...state.authData.user,
+            followings: [...state.authData.user.followings, action.data],
+          },
+        },
+      };
+
+    case "UNFOLLOW_USER":
+      // フォローを解除するユーザーのIDを削除
+      return {
+        ...state,
+        authData: {
+          ...state.authData,
+          user: {
+            ...state.authData.user,
+            followings: [
+              ...state.authData.user.followings.filter(
+                (psersonId) => psersonId !== action.data
+              ),
+            ],
+          },
+        },
+      };
+
     default:
       return state;
   }
